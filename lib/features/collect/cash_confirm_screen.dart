@@ -45,9 +45,9 @@ class _State extends State<CashConfirmScreen> {
             Container(
               width: 80, height: 80,
               decoration: BoxDecoration(
-                color: AppColors.warning.withOpacity(0.15),
+                color: AppColors.warning.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.warning.withOpacity(0.4), width: 2),
+                border: Border.all(color: AppColors.warning.withValues(alpha: 0.4), width: 2),
               ),
               child: const Icon(Icons.payments_outlined, color: AppColors.warning, size: 36),
             ),

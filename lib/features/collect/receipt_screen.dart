@@ -41,9 +41,9 @@ class _State extends State<ReceiptScreen> {
           Container(
             width: 72, height: 72,
             decoration: BoxDecoration(
-              color: AppColors.success.withOpacity(0.15),
+              color: AppColors.success.withValues(alpha: 0.15),
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.success.withOpacity(0.4), width: 2),
+              border: Border.all(color: AppColors.success.withValues(alpha: 0.4), width: 2),
             ),
             child: const Icon(Icons.check_rounded, color: AppColors.success, size: 36),
           ),

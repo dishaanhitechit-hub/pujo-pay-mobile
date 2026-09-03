@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/auth/auth_provider.dart';
 import '../../core/network/dio_client.dart';
 import '../../core/navigation/route_observer.dart';
 import '../../config/api.dart';
 import '../../shared/theme/app_theme.dart';
 
-class PledgeListScreen extends StatefulWidget {
+class PledgeListScreen extends ConsumerStatefulWidget {
   const PledgeListScreen({super.key});
   @override
-  State<PledgeListScreen> createState() => _State();
+  ConsumerState<PledgeListScreen> createState() => _State();
 }
 
-class _State extends State<PledgeListScreen> with RouteAware, WidgetsBindingObserver {
+class _State extends ConsumerState<PledgeListScreen> with RouteAware, WidgetsBindingObserver {
   final _client = DioClient();
   List _pledges = [];
   bool _loading = true;
@@ -62,12 +64,14 @@ class _State extends State<PledgeListScreen> with RouteAware, WidgetsBindingObse
         title: const Text('Pledges / EMI'),
         actions: [IconButton(icon: const Icon(Icons.refresh), onPressed: _load)],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => context.push('/pledge/create').then((_) => _load()),
-        backgroundColor: AppColors.accent,
-        icon: const Icon(Icons.add),
-        label: const Text('New Pledge'),
-      ),
+      floatingActionButton: ref.watch(authProvider).canCreatePledge
+          ? FloatingActionButton.extended(
+              onPressed: () => context.push('/pledge/create').then((_) => _load()),
+              backgroundColor: AppColors.accent,
+              icon: const Icon(Icons.add),
+              label: const Text('New Pledge'),
+            )
+          : null,
       body: _loading
           ? const Center(child: CircularProgressIndicator(color: AppColors.accent))
           : _pledges.isEmpty
@@ -115,7 +119,7 @@ class _PledgeTile extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               decoration: BoxDecoration(
-                color: color.withOpacity(0.12), borderRadius: BorderRadius.circular(6),
+                color: color.withValues(alpha: 0.12), borderRadius: BorderRadius.circular(6),
               ),
               child: Text(status.toUpperCase(),
                 style: TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.w700)),

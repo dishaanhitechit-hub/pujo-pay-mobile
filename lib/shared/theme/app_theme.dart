@@ -24,6 +24,43 @@ class AppColors {
   static const success = Color(0xFF10B981);
   static const danger  = Color(0xFFEF4444);
   static const warning = Color(0xFFF59E0B);
+
+  // Feature tile accents — one per functional area, reused across home and menus
+  static const blue   = Color(0xFF3B82F6);
+  static const teal   = Color(0xFF14B8A6);
+  static const purple = Color(0xFF8B5CF6);
+  static const green  = Color(0xFF10B981);
+  static const indigo = Color(0xFF6366F1);
+  static const pink   = Color(0xFFEC4899);
+  static const amber  = Color(0xFFF59E0B);
+  static const cyan   = Color(0xFF06B6D4);
+  static const rose   = Color(0xFFF43F5E);
+}
+
+/// Layout constants shared across screens, so cards and grids line up
+/// instead of each screen inventing its own spacing.
+class AppSpacing {
+  static const page    = 16.0;
+  static const gutter  = 12.0;
+  static const section = 24.0;
+}
+
+class AppRadii {
+  static const card = 18.0;
+  static const tile = 16.0;
+  static const pill = 999.0;
+}
+
+/// Soft elevation instead of hard borders — the cards read as raised surfaces.
+class AppShadows {
+  static const card = <BoxShadow>[
+    BoxShadow(color: Color(0x0F0F172A), blurRadius: 14, offset: Offset(0, 4)),
+    BoxShadow(color: Color(0x0A0F172A), blurRadius: 2,  offset: Offset(0, 1)),
+  ];
+
+  static const raised = <BoxShadow>[
+    BoxShadow(color: Color(0x1A0F172A), blurRadius: 22, offset: Offset(0, 8)),
+  ];
 }
 
 ThemeData appTheme() {

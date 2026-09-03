@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../core/network/dio_client.dart';
 import '../../core/navigation/route_observer.dart';
 import '../../config/api.dart';

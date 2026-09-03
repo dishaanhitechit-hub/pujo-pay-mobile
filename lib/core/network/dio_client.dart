@@ -37,6 +37,24 @@ class DioClient {
   Future<Response> post(String path, {dynamic data}) =>
       dio.post(path, data: data);
 
+  Future<Response> patch(String path, {dynamic data}) =>
+      dio.patch(path, data: data);
+
+  Future<Response> delete(String path, {dynamic data}) =>
+      dio.delete(path, data: data);
+
+  /// Uploads a single file as multipart/form-data under the field name `file`.
+  Future<Response> upload(String path, String filePath, {String field = 'file'}) async {
+    final form = FormData.fromMap({
+      field: await MultipartFile.fromFile(filePath),
+    });
+    return dio.post(
+      path,
+      data: form,
+      options: Options(contentType: 'multipart/form-data'),
+    );
+  }
+
   // Sends application/x-www-form-urlencoded — required for /pay/* confirm endpoints
   Future<Response> postForm(String path, Map<String, String> fields) =>
       dio.post(path,

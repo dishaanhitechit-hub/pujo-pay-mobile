@@ -51,8 +51,9 @@ class SettingsScreen extends ConsumerWidget {
 
           const SizedBox(height: 28),
           _sectionLabel('Quick Actions'),
-          _tile(Icons.token_outlined, 'Tokens', () => context.push('/token')),
-          if (auth.canViewAll)
+          if (auth.canGenerateToken)
+            _tile(Icons.token_outlined, 'Tokens', () => context.push('/token')),
+          if (auth.canViewDashboard)
             _tile(Icons.people_outline, 'Donors', () => context.push('/donors')),
 
           const SizedBox(height: 28),
